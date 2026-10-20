@@ -1,0 +1,49 @@
+{% extends "shelf/base.html" %}
+{% load static %}
+{% block content %}
+<div style="margin: -4px -22px 0; position: relative; overflow: hidden;">
+    <img src="{% static 'shelf/friends.jpg' %}" style="width: 100%; height: 180px; object-fit: cover; display: block; filter: brightness(0.75);">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,31,38,0.25) 0%, rgba(28,31,38,0.35) 40%, rgba(28,31,38,0.97) 98%);"></div>
+</div>
+
+<div class="brush-title">自留地</div>
+<p style="font-size: 13px; color: #b0a98f; letter-spacing: 1px; margin: 0 0 6px;">瓜米日年的我们</p>
+<div style="width: 32px; height: 2px; background: #c9a17e; margin-bottom: 28px;"></div>
+
+{% for post in posts %}
+<div class="card">
+    <div class="kind-tag">
+        {% if post.kind == "book" %}<i class="ti ti-book-2"></i>
+        {% elif post.kind == "movie" %}<i class="ti ti-movie"></i>
+        {% elif post.kind == "podcast" %}<i class="ti ti-microphone-2"></i>
+        {% else %}<i class="ti ti-dots"></i>
+        {% endif %}
+        {{ post.get_kind_display }}
+    </div>
+    <div class="post-title">{{ post.title }}</div>
+    <div class="post-thoughts">{{ post.thoughts }}</div>
+    <div class="post-meta">
+        <span class="author-badge">
+            <span class="avatar">{{ post.author.username|slice:":2"|upper }}</span>
+            {{ post.author.username }}
+        </span>
+        <span>{{ post.created|date:"m-d" }}</span>
+    </div>
+    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);">
+        {% for comment in post.comments.all %}
+        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">
+            <span style="font-weight: 500; color: var(--text-primary);">{{ comment.author.username }}</span>
+            ：{{ comment.content }}
+        </div>
+        {% endfor %}
+    <form method="post" action="{% url 'add_comment' post.id %}" style="display:flex; align-items:center; gap:8px; margin-top:10px;">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="说点什么…" style="margin:0; padding:8px 12px; font-size:13px;">
+        <button type="submit" style="white-space:nowrap; padding:8px 14px; font-size:13px;">发送</button>
+    </form>
+    </div>
+</div>
+{% empty %}
+<p>还没有人分享</p>
+{% endfor %}
+{% endblock %}

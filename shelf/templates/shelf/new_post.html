@@ -1,0 +1,10 @@
+{% extends "shelf/base.html" %}
+{% block content %}
+<h2>记一笔</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>保存</button>
+</form>
+<p><a href="{% url 'my_posts' %}">返回我的记录</a></p>
+{% endblock %}

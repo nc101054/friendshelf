@@ -1,0 +1,32 @@
+{% extends "shelf/base.html" %}
+{% block content %}
+<h2>我的记录</h2>
+<div class="accent-line"></div>
+{% for post in posts %}
+<div class="card">
+    <div class="kind-tag">
+        {% if post.kind == "book" %}<i class="ti ti-book-2"></i>
+        {% elif post.kind == "movie" %}<i class="ti ti-movie"></i>
+        {% elif post.kind == "podcast" %}<i class="ti ti-microphone-2"></i>
+        {% else %}<i class="ti ti-dots"></i>
+        {% endif %}
+        {{ post.get_kind_display }}
+        {% if post.is_public %}<span style="margin-left:auto">🌍</span>{% else %}<span style="margin-left:auto">🔒</span>{% endif %}
+    </div>
+    <div class="post-title">{{ post.title }}</div>
+    <div class="post-thoughts">{{ post.thoughts }}</div>
+    <div class="post-meta">
+        <span>{{ post.created|date:"Y-m-d" }}</span>
+        <span>
+            <a href="{% url 'edit_post' post.id %}">编辑</a>
+            <form method="post" action="{% url 'delete_post' post.id %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('确定删除吗？')" style="background:none;color:#a86a5a;padding:0;margin-left:10px;">删除</button>
+            </form>
+        </span>
+    </div>
+</div>
+{% empty %}
+<p>还没有记录</p>
+{% endfor %}
+{% endblock %}

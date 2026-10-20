@@ -1,0 +1,12 @@
+{% extends "shelf/base.html" %}
+{% block content %}
+<h2>注册</h2>
+<div class="accent-line"></div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>邀请码：<input name="invite_code"></p>
+    <button type="submit">注册</button>
+</form>
+<p><a href="{% url 'login' %}">已经有账号？去登录</a></p>
+{% endblock %}

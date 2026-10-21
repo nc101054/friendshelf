@@ -7,7 +7,7 @@
     <title>自留地</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Ma+Shan+Zheng&family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
     <style>
         :root {
@@ -178,7 +178,7 @@
     <nav>
         <div class="links">
             <a href="{% url 'index' %}">主页</a>
-            <a href="{% url 'my_posts' %}">我的记录</a>
+            <a href="{% url 'my_posts' %}">我的笔记</a>
             <a href="{% url 'new_post' %}">记一笔</a>
         </div>
         <form method="post" action="{% url 'logout' %}">

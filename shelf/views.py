@@ -39,9 +39,7 @@ def get_daily_quote():
 def register(request):
     form = RegisterForm(request.POST or None)
     if request.method == "POST":
-        if request.POST.get("invite_code") != settings.INVITE_CODE:
-            form.add_error(None, "邀请码不对哦")
-        elif form.is_valid():
+        if form.is_valid():
             login(request, form.save())
             return redirect("index")
     return render(request, "shelf/register.html", {"form": form})

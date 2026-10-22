@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Post
 from .forms import PostForm, CommentForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.password_validation import MinimumLengthValidator
 
 
 class RegisterForm(UserCreationForm):
